@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import re
+import io 
 
 pd.set_option("styler.render.max_elements", 517751)
 
