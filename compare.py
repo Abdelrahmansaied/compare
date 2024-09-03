@@ -607,7 +607,12 @@ if uploaded_file is not None:
                 df.to_excel(writer, index=False, sheet_name='Comparison Results')
             output.seek(0)
 
-            st.download_button("Download Result", "compare_Done.xlsx", data=output, file_name="compare_Done.xlsx", mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+            st.download_button(
+                label="Download Result",
+                data=output,
+                file_name="compare_Done.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            )
 
     except Exception as e:
         st.error(f"An error occurred: {e}")
