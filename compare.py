@@ -598,10 +598,15 @@ if uploaded_file is not None:
             df[['MPN_Compare', 'SE_PART_Compare']] = pd.DataFrame(df.merg_list.tolist(), index=df.index)
 
             st.success("Comparison completed!")
-            st.dataframe(df)  # No styling to avoid rendering issues
+            st.dataframe(df)  # Display the DataFrame
 
-            df.to_excel("compare_Done.xlsx", index=False)
-            st.download_button("Download Result", "compare_Done.xlsx", mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+            # Create an in-memory Excel file
+            output = io.BytesIO()
+            with pd.ExcelWriter(output, engine='openpyxl') as writer:
+                df.to_excel(writer, index=False, sheet_name='Comparison Results')
+            output.seek(0)
+
+            st.download_button("Download Result", "compare_Done.xlsx", data=output, file_name="compare_Done.xlsx", mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
 
     except Exception as e:
         st.error(f"An error occurred: {e}")
