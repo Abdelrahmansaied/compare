@@ -3,6 +3,8 @@ import pandas as pd
 import numpy as np
 import re
 
+pd.set_option("styler.render.max_elements", 517751)
+
 # CSS styles for custom appearance
 st.markdown("""
 <style>
