@@ -597,6 +597,7 @@ if uploaded_file is not None:
             df['Percent'] = df['merg_list'].apply(percent)
 
             df[['MPN_Compare', 'SE_PART_Compare']] = pd.DataFrame(df.merg_list.tolist(), index=df.index)
+            df.drop(columns=['merg_list','MPN_NUMERIC','SE_PART_NUMERIC'],inplace=True
 
             st.success("Comparison completed!")
             st.dataframe(df)  # Display the DataFrame
