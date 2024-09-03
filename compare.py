@@ -598,7 +598,7 @@ if uploaded_file is not None:
             df[['MPN_Compare', 'SE_PART_Compare']] = pd.DataFrame(df.merg_list.tolist(), index=df.index)
 
             st.success("Comparison completed!")
-            st.dataframe(df.style.highlight_max(axis=0))  # Display DataFrame with highlights
+            st.dataframe(df)  # No styling to avoid rendering issues
 
             df.to_excel("compare_Done.xlsx", index=False)
             st.download_button("Download Result", "compare_Done.xlsx", mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
