@@ -615,6 +615,14 @@ if uploaded_file is not None:
             df['Percent'] = df['merg_list'].apply(percent)
 
             df[['MPN_Compare', 'SE_PART_Compare']] = pd.DataFrame(df.merg_list.tolist(), index=df.index)
+            df['MPN_Compare_nan']=df['MPN_Compare'].apply(nonalpha)
+            df['SE_PART_Compare_nan']=df['SE_PART_Compare'].apply(nonalpha)
+            df['MPN_Compare_nan|SE_PART_Compare_nan']=df['MPN_Compare_nan'] + "|" + df['SE_PART_Compare_nan']
+            df['Counts'] = df.groupby(['MPN_Compare_nan|SE_PART_Compare_nan'])['MPN_Compare_nan|SE_PART_Compare_nan'].transform('count')
+            df['SE_PART_Compare_nan'].replace(' ',np.nan,inplace=True)
+            df['MPN_Compare_nan'].replace(' ',np.nan,inplace=True)
+            df['SE_PART_Compare_nan'].replace('',np.nan,inplace=True)
+            df['MPN_Compare_nan'].replace('',np.nan,inplace=True)
             df.drop(columns=['merg_list','MPN_NUMERIC','SE_PART_NUMERIC'],inplace=True)
 
             st.success("Comparison completed!")
