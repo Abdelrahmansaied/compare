@@ -570,8 +570,26 @@ def percent(lst):
     # Percent calculation logic (placeholder)
     return 100
 
-# App title and description
-st.markdown('<h1 class="title">MPN and SE_PART Comparison App</h1>', unsafe_allow_html=True)
+footer = """
+<style>
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #f1f1f1;
+    color: black;
+    text-align: center;
+    padding: 10px;
+}
+</style>
+<div class="footer">
+    <p>© 2024 Developed by  Abdelrahman El Sharkawy . All rights reserved.</p>
+</div>
+"""
+st.markdown(footer, unsafe_allow_html=True)
+
+st.markdown('<h1 class="title">Compare Text App</h1>', unsafe_allow_html=True)
 st.write("Upload an Excel file containing 'MPN' and 'SE_PART' columns to compare their values.")
 
 uploaded_file = st.file_uploader("Choose an Excel file", type="xlsx")
@@ -597,7 +615,7 @@ if uploaded_file is not None:
             df['Percent'] = df['merg_list'].apply(percent)
 
             df[['MPN_Compare', 'SE_PART_Compare']] = pd.DataFrame(df.merg_list.tolist(), index=df.index)
-            df.drop(columns=['merg_list','MPN_NUMERIC','SE_PART_NUMERIC'],inplace=True
+            df.drop(columns=['merg_list','MPN_NUMERIC','SE_PART_NUMERIC'],inplace=True)
 
             st.success("Comparison completed!")
             st.dataframe(df)  # Display the DataFrame
