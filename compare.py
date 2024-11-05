@@ -566,9 +566,10 @@ def compare(lst) :
                     str1[i]=str1[i]
     return [''.join(str1),''.join(str2)]
 
-def percent(lst):
-    # Percent calculation logic (placeholder)
-    return 100
+def percent (lst):
+    str1=lst[0]
+    str2=lst[1]
+    return str(int(SequenceMatcher(None, str1, str2).ratio()*100))
 
 footer = """
 <style>
